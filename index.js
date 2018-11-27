@@ -17,34 +17,42 @@ function fadeIn(el) {
   }, FADEDURATION)
 }
 
+/*************************************************************************/
+
+function delayedFadeOut(div, range) {
+  setTimeout(() => {
+    fadeOut(div)
+  }, range)
+}
+
+function delayedFadeIn(div, range) {
+  setTimeout(() => {
+    fadeIn(div)
+  }, range)
+}
+
+function fadeAllOut(el, group) {
+  group.forEach(div => {
+    if(el !== div) {
+      delayedFadeOut(div, SHORTRANGE)
+    }
+    delayedFadeOut(el, LONGRANGE)
+  })
+}
+
+function fadeAllIn(group) {
+  let range = 500
+  delayedFadeIn(group[0], range)
+  for(let i = 1; i < 4; i++) {
+    delayedFadeIn(group[i], range)
+    range += 250
+  }
+}
+
 function transitionPage(el, groupOut, groupIn) {
   fadeAllOut(el, groupOut)
   setTimeout(() => {
     fadeAllIn(groupIn)
   }, LONGESTPOSSIBLE)
 }
-/*************************************************************************/
 
-function delayedFadeOut(div, range) {
-  // Your solution here
-  fadeOut(div)
-}
-
-function delayedFadeIn(div, range) {
-  // Your solution here
-  fadeIn(div)
-}
-
-function fadeAllOut(el, group) {
-  // Your solution here
-  group.forEach(div => {
-    delayedFadeOut(div)
-  })
-}
-
-function fadeAllIn(group) {
-  // Your solution here
-  group.forEach(div => {
-    delayedFadeIn(div)
-  })
-}
